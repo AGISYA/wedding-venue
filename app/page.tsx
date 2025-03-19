@@ -1,103 +1,139 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useState, useEffect } from "react";
+import Header from "@/components/layout/header";
+import Footer from "@/components/layout/footer";
+import MobileMenu from "@/components/layout/mobile-menu";
+import HeroSection from "@/components/sections/hero-section";
+import AboutSection from "@/components/sections/about-section";
+import VenueDetailsSection from "@/components/sections/venue-details-section";
+import FeaturesSection from "@/components/sections/features-section";
+import GallerySection from "@/components/sections/gallery-section";
+import VideoSection from "@/components/sections/video-section";
+import PricingSection from "@/components/sections/pricing-section";
+import FAQSection from "@/components/sections/faq-section";
+import TestimonialsSection from "@/components/sections/testimonials-section";
+import ContactSection from "@/components/sections/contact-section";
+import CTASection from "@/components/sections/cta-section";
+import WhatsAppButton from "@/components/ui/whatsapp-button";
+
+export default function WeddingVenueLanding() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("beranda");
+
+  // Handle scroll effects
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+
+      // Update active section based on scroll position
+      const sections = [
+        "beranda",
+        "tentang",
+        "venue",
+        "fasilitas",
+        "galeri",
+        "video",
+        "paket",
+        "faq",
+        "kontak",
+      ];
+      for (const section of sections.reverse()) {
+        const element = document.getElementById(section);
+        if (element && window.scrollY >= element.offsetTop - 200) {
+          setActiveSection(section);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [mobileMenuOpen]);
+
+  // WhatsApp handler
+  const handleWhatsAppClick = () => {
+    const phoneNumber = "6281234567890"; // Replace with your actual WhatsApp number
+    const message =
+      "Halo, saya tertarik untuk menyewa tempat pernikahan Anda. Bisakah Anda memberikan informasi lebih lanjut?";
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+      message
+    )}`;
+    window.open(whatsappUrl, "_blank");
+  };
+
+  // Scroll to section smoothly - Menambahkan anotasi tipe untuk sectionId
+  const scrollToSection = (sectionId: string) => {
+    setMobileMenuOpen(false);
+    const element = document.getElementById(sectionId);
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop - 80,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="flex flex-col min-h-screen bg-[#fffaf5]">
+      <Header
+        isScrolled={isScrolled}
+        activeSection={activeSection}
+        scrollToSection={scrollToSection}
+        handleWhatsAppClick={handleWhatsAppClick}
+        setMobileMenuOpen={setMobileMenuOpen}
+        mobileMenuOpen={mobileMenuOpen}
+      />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+      {mobileMenuOpen && (
+        <MobileMenu
+          activeSection={activeSection}
+          scrollToSection={scrollToSection}
+          handleWhatsAppClick={handleWhatsAppClick}
+        />
+      )}
+
+      <main className="flex-1 pt-16">
+        <HeroSection
+          scrollToSection={scrollToSection}
+          handleWhatsAppClick={handleWhatsAppClick}
+        />
+        <AboutSection scrollToSection={scrollToSection} />
+        <VenueDetailsSection handleWhatsAppClick={handleWhatsAppClick} />
+        <FeaturesSection />
+        <GallerySection />
+        <VideoSection />
+        <PricingSection handleWhatsAppClick={handleWhatsAppClick} />
+        <FAQSection />
+        <TestimonialsSection />
+        <ContactSection handleWhatsAppClick={handleWhatsAppClick} />
+        <CTASection handleWhatsAppClick={handleWhatsAppClick} />
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+      <Footer
+        scrollToSection={scrollToSection}
+        handleWhatsAppClick={handleWhatsAppClick}
+      />
+
+      <WhatsAppButton handleWhatsAppClick={handleWhatsAppClick} />
     </div>
   );
 }
