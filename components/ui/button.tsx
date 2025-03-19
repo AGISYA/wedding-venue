@@ -19,6 +19,7 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         rose: "bg-rose-600 text-white hover:bg-rose-700",
         green: "bg-green-600 text-white hover:bg-green-700",
+        white: "bg-white text-rose-600 hover:bg-rose-100", // ✅ Tambahkan ini
       },
       size: {
         default: "h-10 px-4 py-2",
