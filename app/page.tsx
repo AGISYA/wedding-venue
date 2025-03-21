@@ -80,7 +80,7 @@ export default function WeddingVenueLanding() {
     window.open(whatsappUrl, "_blank");
   };
 
-  // Scroll to section smoothly - Menambahkan anotasi tipe untuk sectionId
+  // Scroll to section smoothly
   const scrollToSection = (sectionId: string) => {
     setMobileMenuOpen(false);
     const element = document.getElementById(sectionId);

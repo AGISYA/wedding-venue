@@ -37,10 +37,10 @@ export default function VenueDetailsSection({
   return (
     <section
       id="venue"
-      className="py-12 sm:py-16 text-black md:py-20 lg:py-28 bg-gradient-to-b from-white to-rose-50"
+      className="py-12 sm:py-16 text-black md:py-20 lg:py-28 bg-gradient-to-b from-white to-rose-50 w-full overflow-hidden"
     >
-      <div className="container px-4 sm:px-6">
-        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 md:mb-16 space-y-2 sm:space-y-4">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div className="text-center max-h-screen mx-auto mb-8 sm:mb-12 md:mb-16 space-y-2 sm:space-y-4">
           <div className="flex items-center justify-center gap-2">
             <div className="h-px w-6 sm:w-10 bg-rose-400"></div>
             <span className="text-rose-600 uppercase tracking-wider text-xs sm:text-sm font-medium">
@@ -57,26 +57,21 @@ export default function VenueDetailsSection({
           </p>
         </div>
 
-        <Tabs defaultValue="indoor" className="max-w-5xl mx-auto">
-          <TabsList className="grid w-full grid-cols-3 mb-6 sm:mb-8 p-1 bg-rose-100 rounded-full">
-            <TabsTrigger
-              value="indoor"
-              className="rounded-full data-[state=active]:bg-white data-[state=active]:text-rose-600 data-[state=active]:shadow-sm py-2 sm:py-3 text-xs sm:text-sm"
-            >
-              Indoor
-            </TabsTrigger>
-            <TabsTrigger
-              value="outdoor"
-              className="rounded-full data-[state=active]:bg-white data-[state=active]:text-rose-600 data-[state=active]:shadow-sm py-2 sm:py-3 text-xs sm:text-sm"
-            >
-              Outdoor
-            </TabsTrigger>
-            <TabsTrigger
-              value="facilities"
-              className="rounded-full data-[state=active]:bg-white data-[state=active]:text-rose-600 data-[state=active]:shadow-sm py-2 sm:py-3 text-xs sm:text-sm"
-            >
-              Fasilitas Tambahan
-            </TabsTrigger>
+        <Tabs defaultValue="indoor" className="w-full max-w-5xl mx-auto">
+          <TabsList className="grid w-full grid-cols-3 mb-6 sm:mb-8 p-1 bg-rose-100 rounded-full justify-center">
+            {[
+              { value: "indoor", label: "Indoor" },
+              { value: "outdoor", label: "Outdoor" },
+              { value: "facilities", label: "Fasilitas Tambahan" },
+            ].map((tab) => (
+              <TabsTrigger
+                key={tab.value}
+                value={tab.value}
+                className="rounded-full data-[state=active]:bg-white data-[state=active]:text-rose-600 data-[state=active]:shadow-sm text-xs sm:text-sm font-medium w-full text-center"
+              >
+                {tab.label}
+              </TabsTrigger>
+            ))}
           </TabsList>
 
           <TabsContent value="indoor" className="space-y-8">
@@ -195,30 +190,39 @@ function IndoorVenues() {
       {venues.map((venue, index) => (
         <div
           key={index}
-          className="grid md:grid-cols-2 gap-6 sm:gap-8 items-center mb-8 sm:mb-0"
+          className="grid md:grid-cols-2 gap-6 sm:gap-8 items-center mb-8 sm:mb-12 md:mb-16"
         >
+          {/* Kolom Gambar with fixed aspect ratio */}
           <div
             className={`relative ${
-              venue.reverse ? "order-2 md:order-1" : "order-2 md:order-2"
+              venue.reverse ? "md:order-2" : "md:order-1"
             }`}
           >
-            {!venue.reverse && (
+            <div className="aspect-[4/3] w-full overflow-hidden rounded-xl sm:rounded-2xl shadow-lg">
               <Image
                 src={venue.image || "/placeholder.svg"}
                 alt={venue.name}
                 width={800}
                 height={600}
-                className="rounded-xl sm:rounded-2xl shadow-lg object-cover w-full h-auto"
+                className="object-cover w-full h-full"
               />
-            )}
+            </div>
           </div>
-          <div className="space-y-2 sm:space-y-4 order-1 md:order-1">
+
+          {/* Kolom Teks with consistent padding */}
+          <div
+            className={`flex flex-col justify-center space-y-2 sm:space-y-4 ${
+              venue.reverse ? "md:order-1" : "md:order-2"
+            } px-0 md:px-4 lg:px-8`}
+          >
             <h3 className="text-xl sm:text-2xl font-serif font-bold">
               {venue.name}
             </h3>
             <p className="text-sm sm:text-base text-gray-700">
               {venue.description}
             </p>
+
+            {/* Fitur Venue with consistent spacing */}
             <div className="grid grid-cols-2 gap-2 sm:gap-4 mt-2 sm:mt-4">
               {venue.features.map((feature, i) => (
                 <div key={i} className="flex items-center gap-1 sm:gap-2">
@@ -227,21 +231,6 @@ function IndoorVenues() {
                 </div>
               ))}
             </div>
-          </div>
-          <div
-            className={`relative ${
-              venue.reverse ? "order-1 md:order-2" : "hidden md:block"
-            }`}
-          >
-            {venue.reverse && (
-              <Image
-                src={venue.image || "/placeholder.svg"}
-                alt={venue.name}
-                width={800}
-                height={600}
-                className="rounded-xl sm:rounded-2xl shadow-lg object-cover w-full h-auto"
-              />
-            )}
           </div>
         </div>
       ))}
@@ -334,30 +323,39 @@ function OutdoorVenues() {
       {venues.map((venue, index) => (
         <div
           key={index}
-          className="grid md:grid-cols-2 gap-6 sm:gap-8 items-center mb-8 sm:mb-0"
+          className="grid md:grid-cols-2 gap-6 sm:gap-8 items-center mb-8 sm:mb-12 md:mb-16"
         >
+          {/* Kolom Gambar (Kiri di Desktop, Kanan di Mobile jika reverse) */}
           <div
             className={`relative ${
-              venue.reverse ? "order-2 md:order-1" : "order-2 md:order-2"
+              venue.reverse ? "md:order-2" : "md:order-1"
             }`}
           >
-            {!venue.reverse && (
+            <div className="aspect-[4/3] w-full overflow-hidden rounded-xl sm:rounded-2xl shadow-lg">
               <Image
                 src={venue.image || "/placeholder.svg"}
                 alt={venue.name}
                 width={800}
                 height={600}
-                className="rounded-xl sm:rounded-2xl shadow-lg object-cover w-full h-auto"
+                className="object-cover w-full h-full"
               />
-            )}
+            </div>
           </div>
-          <div className="space-y-2 sm:space-y-4 order-1 md:order-1">
+
+          {/* Kolom Teks */}
+          <div
+            className={`flex flex-col justify-center space-y-2 sm:space-y-4 ${
+              venue.reverse ? "md:order-1" : "md:order-2"
+            } px-0 md:px-4 lg:px-8`}
+          >
             <h3 className="text-xl sm:text-2xl font-serif font-bold">
               {venue.name}
             </h3>
             <p className="text-sm sm:text-base text-gray-700">
               {venue.description}
             </p>
+
+            {/* Fitur Venue */}
             <div className="grid grid-cols-2 gap-2 sm:gap-4 mt-2 sm:mt-4">
               {venue.features.map((feature, i) => (
                 <div key={i} className="flex items-center gap-1 sm:gap-2">
@@ -366,21 +364,6 @@ function OutdoorVenues() {
                 </div>
               ))}
             </div>
-          </div>
-          <div
-            className={`relative ${
-              venue.reverse ? "order-1 md:order-2" : "hidden md:block"
-            }`}
-          >
-            {venue.reverse && (
-              <Image
-                src={venue.image || "/placeholder.svg"}
-                alt={venue.name}
-                width={800}
-                height={600}
-                className="rounded-xl sm:rounded-2xl shadow-lg object-cover w-full h-auto"
-              />
-            )}
           </div>
         </div>
       ))}
@@ -456,11 +439,11 @@ function AdditionalFacilities() {
 
   return (
     <>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-stretch">
         {facilities.map((facility, index) => (
           <Card
             key={index}
-            className="border-none shadow-lg hover:shadow-xl transition-all duration-300 bg-white rounded-xl sm:rounded-2xl overflow-hidden"
+            className="border-none shadow-lg hover:shadow-xl transition-all duration-300 bg-white rounded-xl sm:rounded-2xl overflow-hidden flex flex-col h-full"
           >
             <CardHeader className="pb-1 sm:pb-2 pt-4 px-4 sm:pt-6 sm:px-6">
               <div className="bg-rose-100 p-2 sm:p-3 rounded-full w-fit mb-2">
@@ -470,7 +453,7 @@ function AdditionalFacilities() {
                 {facility.title}
               </CardTitle>
             </CardHeader>
-            <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6">
+            <CardContent className="px-4 pb-4 sm:px-6 sm:pb-6 flex-grow">
               <p className="text-xs sm:text-sm text-gray-700">
                 {facility.description}
               </p>
@@ -480,14 +463,14 @@ function AdditionalFacilities() {
       </div>
 
       <div className="bg-rose-100 rounded-xl sm:rounded-2xl p-4 sm:p-6 mt-6 sm:mt-8">
-        <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">
+        <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-center">
           Informasi Musiman
         </h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 items-stretch">
           {seasons.map((season, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 flex flex-col items-center text-center"
+              className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 flex flex-col items-center text-center h-full justify-between"
             >
               <div className="bg-rose-50 p-2 sm:p-3 rounded-full mb-2 sm:mb-3">
                 {season.icon}

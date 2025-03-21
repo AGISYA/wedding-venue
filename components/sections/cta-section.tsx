@@ -15,7 +15,7 @@ export default function CTASection({ handleWhatsAppClick }: CTASectionProps) {
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-rose-500 rounded-full opacity-50 translate-x-1/3 translate-y-1/3"></div>
 
       <div className="container relative z-10">
-        <div className="max-w-4xl mx-auto text-center text-white space-y-6 md:space-y-8">
+        <div className="w-screen mx-auto text-center text-white space-y-6 md:space-y-8">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-bold">
             Wujudkan Pernikahan Impian Anda di Harmoni Wedding Venue
           </h2>

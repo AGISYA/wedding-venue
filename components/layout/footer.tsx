@@ -33,7 +33,7 @@ export default function Footer({
   ];
 
   return (
-    <footer className="bg-gray-900 text-white py-10 sm:py-12 md:py-16 overflow-hidden">
+    <footer className="bg-gray-900 p-7 text-white py-10 sm:py-12 md:py-16 overflow-hidden">
       <div className="container">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
           <div className="space-y-4 sm:space-y-6">

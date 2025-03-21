@@ -4,9 +4,9 @@ import type React from "react";
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Calendar, Clock, MapPin, Phone, Mail, Send } from "lucide-react";
-import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
 
 interface ContactSectionProps {
   handleWhatsAppClick: () => void;
@@ -58,8 +58,8 @@ export default function ContactSection({
 
   return (
     <section id="kontak" className="py-20 md:py-28 overflow-hidden">
-      <div className="container">
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+      <div className="section-container">
+        <div className="text-center w-screen mx-auto mb-16 space-y-4">
           <div className="flex items-center justify-center gap-2">
             <div className="h-px w-10 bg-rose-400"></div>
             <span className="text-rose-600 uppercase tracking-wider text-sm font-medium">
@@ -193,7 +193,7 @@ export default function ContactSection({
                     onChange={handleChange}
                     placeholder="Masukkan nama lengkap Anda"
                     required
-                    className="text-gray-900"
+                    className="text-gray-900 bg-gray-300"
                   />
                 </div>
 
@@ -213,7 +213,7 @@ export default function ContactSection({
                       onChange={handleChange}
                       placeholder="email@example.com"
                       required
-                      className="text-gray-900"
+                      className="text-gray-900 bg-gray-300"
                     />
                   </div>
                   <div>
@@ -230,7 +230,7 @@ export default function ContactSection({
                       onChange={handleChange}
                       placeholder="+62 8xx xxxx xxxx"
                       required
-                      className="text-gray-900"
+                      className="text-gray-900 bg-gray-300"
                     />
                   </div>
                 </div>
@@ -248,7 +248,7 @@ export default function ContactSection({
                     type="date"
                     value={formData.date}
                     onChange={handleChange}
-                    className="text-gray-900"
+                    className="text-gray-900 bg-gray-300"
                   />
                 </div>
 
@@ -267,17 +267,17 @@ export default function ContactSection({
                     placeholder="Tulis pesan atau pertanyaan Anda di sini..."
                     rows={4}
                     required
-                    className="text-gray-900"
+                    className="text-gray-900 bg-gray-300"
                   />
                 </div>
 
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full gap-2"
+                  className="w-full gap-2 text-green-500"
                 >
                   {isSubmitting ? "Mengirim..." : "Kirim Pesan"}
-                  <Send className="h-4 w-4" />
+                  <Send className="h-4 w-4 text-green-500" />
                 </Button>
               </form>
             )}
@@ -286,16 +286,16 @@ export default function ContactSection({
 
         <div className="mt-16 max-w-5xl mx-auto">
           <div className="bg-gray-200 rounded-2xl overflow-hidden h-80 md:h-96">
-            {/* Google Maps embed dengan width 100% */}
+            {/* Google Maps embed dengan lokasi Garut Town Square */}
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126920.29279019244!2d106.7588675!3d-6.2297465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3e945e34b9d%3A0x5371bf0fdad786a2!2sJakarta%20Selatan%2C%20Kota%20Jakarta%20Selatan%2C%20Daerah%20Khusus%20Ibukota%20Jakarta!5e0!3m2!1sid!2sid!4v1656555883123!5m2!1sid!2sid"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63323.29727627252!2d107.86505637658604!3d-7.216200527553615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68b1ae6aaaaaab%3A0x828571d17a4000eb!2sGarut%20Town%20Square!5e0!3m2!1sid!2sid!4v1711012345678!5m2!1sid!2sid"
               width="100%"
               height="100%"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Harmoni Wedding Venue Location"
+              title="Lokasi Garut Town Square"
             ></iframe>
           </div>
         </div>

@@ -150,23 +150,26 @@ function HistoryTimeline() {
           Perjalanan Harmoni Wedding Venue
         </h3>
 
-        <div className="space-y-6 sm:space-y-8">
+        <div className="space-y-8 sm:space-y-10">
           {timelineItems.map((item, index) => (
             <div
               key={index}
-              className="flex flex-col md:flex-row gap-4 sm:gap-6"
+              className="flex flex-col md:flex-row items-start md:items-center gap-4 sm:gap-6"
             >
-              <div className="md:w-1/4 flex flex-col items-center md:items-start">
+              {/* Bagian Tahun */}
+              <div className="flex flex-col items-center md:items-start md:w-[120px]">
                 <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-rose-200 flex items-center justify-center mb-2">
                   <span className="font-bold text-sm sm:text-base text-gray-900">
                     {item.year}
                   </span>
                 </div>
                 {index < timelineItems.length - 1 && (
-                  <div className="h-full w-0.5 bg-rose-200 hidden md:block"></div>
+                  <div className="h-full w-0.5 bg-rose-200 flex-1"></div>
                 )}
               </div>
-              <div className="md:w-3/4">
+
+              {/* Bagian Konten */}
+              <div className="flex-1">
                 <h4 className="text-lg sm:text-xl font-medium mb-1 sm:mb-2 text-gray-900">
                   {item.title}
                 </h4>

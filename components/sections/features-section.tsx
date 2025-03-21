@@ -103,7 +103,7 @@ export default function FeaturesSection() {
               className="group hover:shadow-xl transition-all duration-300 border-none bg-white/80 backdrop-blur-sm"
             >
               <CardContent className="p-6 md:p-8 space-y-4">
-                <div className="bg-rose-100 p-4 rounded-2xl w-fit group-hover:bg-rose-600 transition-colors duration-300">
+                <div className="bg-rose-100 p-4 rounded-2xl w-fit group-hover:bg-rose-200 transition-colors duration-300">
                   {feature.icon}
                 </div>
                 <h3 className="text-lg md:text-xl font-bold text-gray-900">

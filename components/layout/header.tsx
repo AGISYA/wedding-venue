@@ -40,8 +40,9 @@ export default function Header({
           : "bg-transparent py-4"
       }`}
     >
-      <div className="container flex items-center justify-between">
-        <div className="flex items-center gap-2">
+      <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
+        {/* Logo */}
+        <div className="flex items-center mx-4 md:mx-6 lg:mx-8 gap-2">
           <div className="relative h-8 w-8 sm:h-10 sm:w-10 bg-rose-500 rounded-full flex items-center justify-center transform rotate-[-10deg] hover:rotate-0 transition-all duration-300">
             <Heart className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
             <span className="absolute -top-1 -right-1 h-2 w-2 sm:h-3 sm:w-3 bg-white rounded-full"></span>
@@ -56,9 +57,9 @@ export default function Header({
           </div>
         </div>
 
-        {/* Desktop Navigation - Scrollable pada layar medium */}
-        <nav className="hidden md:flex items-center overflow-x-auto max-w-[50vw] lg:max-w-none no-scrollbar">
-          <div className="flex gap-4 lg:gap-6 px-2">
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center justify-center flex-grow">
+          <div className="flex gap-4 lg:gap-6 px-2 flex-wrap justify-center">
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -78,11 +79,12 @@ export default function Header({
           </div>
         </nav>
 
+        {/* Tombol WhatsApp */}
         <Button
           onClick={handleWhatsAppClick}
           variant="green"
           rounded="full"
-          className="hidden md:flex gap-2 px-4 lg:px-6 text-xs lg:text-sm"
+          className="hidden md:flex gap-2 px-4 lg:px-6 text-xs mx-4 lg:text-sm"
         >
           <Phone className="h-3 w-3 lg:h-4 lg:w-4" />
           <span className="xs-hidden">Hubungi Kami</span>
