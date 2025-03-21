@@ -63,7 +63,7 @@ export default function FAQSection() {
 
   return (
     <section id="faq" className="py-20 md:py-28">
-      <div className="container">
+      <div className="container mx-auto max-w-screen-lg px-4 md:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <div className="flex items-center justify-center gap-2">
             <div className="h-px w-10 bg-rose-400"></div>
@@ -80,11 +80,11 @@ export default function FAQSection() {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto space-y-6">
           <Accordion type="single" collapsible className="space-y-4">
             {faqs.map((faq, index) => (
               <AccordionItem
-                key={index}
+                key={`item-${index}`}
                 value={`item-${index}`}
                 className="border border-gray-200 rounded-lg overflow-hidden"
               >

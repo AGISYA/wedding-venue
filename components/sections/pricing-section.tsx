@@ -83,7 +83,7 @@ export default function PricingSection({
       id="paket"
       className="py-20 md:py-28 bg-gradient-to-b from-white to-rose-50 overflow-hidden"
     >
-      <div className="container">
+      <div className="container max-w-6xl mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <div className="flex items-center justify-center gap-2">
             <div className="h-px w-10 bg-rose-400"></div>
@@ -101,8 +101,7 @@ export default function PricingSection({
           </p>
         </div>
 
-        {/* Perbaikan responsif untuk pricing cards */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8">
           {pricingPlans.map((plan, index) => (
             <Card
               key={index}
@@ -143,11 +142,7 @@ export default function PricingSection({
                   onClick={handleWhatsAppClick}
                   variant={plan.popular ? "rose" : "outline"}
                   rounded="full"
-                  className={`w-full gap-2 group ${
-                    plan.popular
-                      ? ""
-                      : "border-rose-200 text-rose-600 hover:bg-rose-50"
-                  }`}
+                  className="w-full gap-2 group"
                 >
                   Pesan Sekarang
                   <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -155,55 +150,6 @@ export default function PricingSection({
               </CardFooter>
             </Card>
           ))}
-        </div>
-
-        <div className="mt-16 bg-white rounded-3xl p-6 sm:p-8 md:p-12 shadow-lg max-w-4xl mx-auto">
-          <h3 className="text-xl sm:text-2xl font-serif font-bold mb-6 text-center text-gray-900">
-            Pertanyaan Umum tentang Paket
-          </h3>
-          <div className="space-y-6">
-            <div>
-              <h4 className="font-bold mb-2 text-gray-900">
-                Apakah paket dapat disesuaikan?
-              </h4>
-              <p className="text-gray-800 text-sm sm:text-base">
-                Ya, semua paket dapat disesuaikan dengan kebutuhan spesifik
-                Anda. Kami memahami bahwa setiap pernikahan unik, jadi kami
-                menawarkan fleksibilitas dalam menyesuaikan layanan.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-bold mb-2 text-gray-900">
-                Bagaimana dengan pembayaran?
-              </h4>
-              <p className="text-gray-800 text-sm sm:text-base">
-                Kami menerima pembayaran dalam beberapa tahap. Biasanya, 50%
-                dibayarkan sebagai deposit untuk mengamankan tanggal, dan
-                sisanya dibayarkan satu bulan sebelum hari pernikahan.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-bold mb-2 text-gray-900">
-                Apakah ada biaya tambahan?
-              </h4>
-              <p className="text-gray-800 text-sm sm:text-base">
-                Semua biaya sudah termasuk dalam paket yang dipilih. Namun, jika
-                Anda meminta layanan tambahan di luar paket, mungkin ada biaya
-                tambahan yang akan diinformasikan sebelumnya.
-              </p>
-            </div>
-          </div>
-          <div className="mt-8 text-center">
-            <Button
-              onClick={handleWhatsAppClick}
-              variant="green"
-              rounded="full"
-              className="gap-2"
-            >
-              Tanyakan Lebih Lanjut via WhatsApp
-              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </div>
         </div>
       </div>
     </section>

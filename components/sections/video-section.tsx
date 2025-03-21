@@ -4,8 +4,11 @@ import { Button } from "@/components/ui/button";
 
 export default function VideoSection() {
   return (
-    <section id="video" className="py-20 md:py-28">
-      <div className="container">
+    <section
+      id="video"
+      className="py-20 md:py-28 bg-gradient-to-b from-white to-rose-50"
+    >
+      <div className="container max-w-screen-lg mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <div className="flex items-center justify-center gap-2">
             <div className="h-px w-10 bg-rose-400"></div>
@@ -35,7 +38,7 @@ export default function VideoSection() {
             ></iframe>
           </div>
 
-          <div className="mt-8 text-black bg-rose-50 rounded-xl p-6 text-center">
+          <div className="mt-8 text-black bg-rose-50 rounded-xl p-6 text-center max-w-2xl mx-auto">
             <h3 className="text-xl font-medium mb-2">
               Ingin Melihat Lebih Banyak Video?
             </h3>
@@ -44,7 +47,10 @@ export default function VideoSection() {
               di venue kami. Hubungi kami untuk melihat lebih banyak inspirasi
               untuk pernikahan Anda.
             </p>
-            <Button variant="rose" rounded="full" className="gap-2">
+            <Button
+              variant="rose"
+              className="rounded-full px-6 py-3 text-lg font-semibold"
+            >
               Lihat Galeri Video Lengkap
             </Button>
           </div>

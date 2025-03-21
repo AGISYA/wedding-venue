@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Heart,
@@ -34,10 +35,10 @@ export default function Footer({
 
   return (
     <footer className="bg-gray-900 p-7 text-white py-10 sm:py-12 md:py-16 overflow-hidden">
-      <div className="container">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
-          <div className="space-y-4 sm:space-y-6">
-            <div className="flex items-center gap-2 sm:gap-3">
+      <div className="container max-w-screen-lg mx-auto px-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 lg:gap-12">
+          <div className="space-y-4 sm:space-y-6 text-center sm:text-left">
+            <div className="flex flex-col items-center sm:items-start gap-2 sm:gap-3">
               <div className="relative h-8 w-8 sm:h-10 sm:w-10 bg-rose-500 rounded-full flex items-center justify-center transform rotate-[-10deg]">
                 <Heart className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                 <span className="absolute -top-1 -right-1 h-2 w-2 sm:h-3 sm:w-3 bg-white rounded-full"></span>
@@ -55,28 +56,16 @@ export default function Footer({
               Mewujudkan pernikahan impian Anda dengan venue pernikahan yang
               elegan dan layanan profesional.
             </p>
-            <div className="flex gap-3 sm:gap-4">
-              <a
-                href="#"
-                className="h-8 w-8 sm:h-10 sm:w-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-rose-600 transition-colors duration-300"
-                aria-label="Instagram"
-              >
-                <Instagram className="h-4 w-4 sm:h-5 sm:w-5" />
-              </a>
-              <a
-                href="#"
-                className="h-8 w-8 sm:h-10 sm:w-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-rose-600 transition-colors duration-300"
-                aria-label="Facebook"
-              >
-                <Facebook className="h-4 w-4 sm:h-5 sm:w-5" />
-              </a>
-              <a
-                href="#"
-                className="h-8 w-8 sm:h-10 sm:w-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-rose-600 transition-colors duration-300"
-                aria-label="Twitter"
-              >
-                <Twitter className="h-4 w-4 sm:h-5 sm:w-5" />
-              </a>
+            <div className="flex justify-center sm:justify-start gap-3 sm:gap-4">
+              {[Instagram, Facebook, Twitter].map((Icon, index) => (
+                <a
+                  key={index}
+                  href="#"
+                  className="h-8 w-8 sm:h-10 sm:w-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-rose-600 transition-colors duration-300"
+                >
+                  <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
+                </a>
+              ))}
             </div>
           </div>
 
@@ -84,7 +73,7 @@ export default function Footer({
             <h3 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6">
               Tautan Cepat
             </h3>
-            <ul className="space-y-2 sm:space-y-4 grid grid-cols-1 sm:grid-cols-1">
+            <ul className="space-y-2 sm:space-y-4">
               {navItems.map((item) => (
                 <li key={item.id}>
                   <button
@@ -104,24 +93,18 @@ export default function Footer({
               Kontak
             </h3>
             <ul className="space-y-2 sm:space-y-4">
-              <li className="flex items-center gap-2 sm:gap-3">
-                <Phone className="h-3 w-3 sm:h-4 sm:w-4 text-rose-400 shrink-0" />
-                <span className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors duration-300">
-                  +62 812 3456 7890
-                </span>
-              </li>
-              <li className="flex items-center gap-2 sm:gap-3">
-                <Mail className="h-3 w-3 sm:h-4 sm:w-4 text-rose-400 shrink-0" />
-                <span className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors duration-300">
-                  info@harmoniwedding.com
-                </span>
-              </li>
-              <li className="flex items-start gap-2 sm:gap-3">
-                <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-rose-400 mt-1 shrink-0" />
-                <span className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors duration-300">
-                  Jl. Pernikahan Indah No. 123, Jakarta Selatan
-                </span>
-              </li>
+              {[Phone, Mail, MapPin].map((Icon, index) => (
+                <li key={index} className="flex items-center gap-2 sm:gap-3">
+                  <Icon className="h-3 w-3 sm:h-4 sm:w-4 text-rose-400 shrink-0" />
+                  <span className="text-sm sm:text-base text-gray-400 hover:text-white transition-colors duration-300">
+                    {index === 0
+                      ? "+62 812 3456 7890"
+                      : index === 1
+                      ? "info@harmoniwedding.com"
+                      : "Jl. Pernikahan Indah No. 123, Jakarta Selatan"}
+                  </span>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -129,25 +112,27 @@ export default function Footer({
             <h3 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6">
               Jam Operasional
             </h3>
-            <ul className="space-y-2 sm:space-y-4">
-              <li className="text-sm sm:text-base text-gray-400">
-                Senin - Jumat: 09:00 - 18:00
-              </li>
-              <li className="text-sm sm:text-base text-gray-400">
-                Sabtu: 09:00 - 16:00
-              </li>
-              <li className="text-sm sm:text-base text-gray-400">
-                Minggu: 10:00 - 15:00
-              </li>
+            <ul className="space-y-2 sm:space-y-4 text-center sm:text-left">
+              {[
+                "Senin - Jumat: 09:00 - 18:00",
+                "Sabtu: 09:00 - 16:00",
+                "Minggu: 10:00 - 15:00",
+              ].map((text, index) => (
+                <li key={index} className="text-sm sm:text-base text-gray-400">
+                  {text}
+                </li>
+              ))}
             </ul>
-            <Button
-              onClick={handleWhatsAppClick}
-              variant="rose"
-              rounded="full"
-              className="mt-4 sm:mt-6 gap-2 text-sm sm:text-base"
-            >
-              Hubungi Kami
-            </Button>
+            <div className="flex justify-center sm:justify-start">
+              <Button
+                onClick={handleWhatsAppClick}
+                variant="rose"
+                rounded="full"
+                className="mt-4 sm:mt-6 gap-2 text-sm sm:text-base"
+              >
+                Hubungi Kami
+              </Button>
+            </div>
           </div>
         </div>
       </div>

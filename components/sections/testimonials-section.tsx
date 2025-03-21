@@ -5,6 +5,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Star, Quote } from "lucide-react";
 
 export default function TestimonialsSection() {
+  const featuredTestimonial = {
+    name: "Citra & Danu",
+    role: "Pengantin VIP",
+    date: "Mei 2023",
+    image: "/images/SCF9146.jpg",
+    rating: 5,
+    text: "Kami mencari venue pernikahan selama berbulan-bulan dan akhirnya menemukan Harmoni Wedding Venue. Dari awal kunjungan pertama, kami langsung jatuh cinta dengan keindahan tempat ini. Tim Harmoni sangat profesional dan memperhatikan setiap detail kecil yang kami inginkan. Mereka bahkan mengakomodasi beberapa permintaan khusus kami yang cukup rumit. Pada hari pernikahan, semuanya berjalan sempurna tanpa hambatan. Dekorasi yang mereka siapkan bahkan lebih indah dari yang kami bayangkan. Makanan yang disajikan mendapat pujian dari semua tamu. Kami sangat merekomendasikan Harmoni Wedding Venue untuk pasangan yang mencari tempat pernikahan impian dengan layanan premium.",
+  };
+
   const testimonials = [
     {
       name: "Anita & Budi",
@@ -50,36 +59,16 @@ export default function TestimonialsSection() {
     },
   ];
 
-  const featuredTestimonial = {
-    name: "Citra & Danu",
-    role: "Pengantin VIP",
-    date: "Mei 2023",
-    image: "/images/SCF9146.jpg",
-    rating: 5,
-    text: "Kami mencari venue pernikahan selama berbulan-bulan dan akhirnya menemukan Harmoni Wedding Venue. Dari awal kunjungan pertama, kami langsung jatuh cinta dengan keindahan tempat ini. Tim Harmoni sangat profesional dan memperhatikan setiap detail kecil yang kami inginkan. Mereka bahkan mengakomodasi beberapa permintaan khusus kami yang cukup rumit. Pada hari pernikahan, semuanya berjalan sempurna tanpa hambatan. Dekorasi yang mereka siapkan bahkan lebih indah dari yang kami bayangkan. Makanan yang disajikan mendapat pujian dari semua tamu. Kami sangat merekomendasikan Harmoni Wedding Venue untuk pasangan yang mencari tempat pernikahan impian dengan layanan premium.",
-  };
-
   return (
     <section
       id="testimonials"
       className="py-20 md:py-28 bg-gradient-to-b from-rose-50 to-white"
     >
-      <div className="container">
+      <div className="container max-w-screen-xl mx-auto px-6 lg:px-12">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="flex items-center justify-center gap-2">
-            <div className="h-px w-10 bg-rose-400"></div>
-            <span className="text-rose-600 uppercase tracking-wider text-sm font-medium">
-              Testimonial
-            </span>
-            <div className="h-px w-10 bg-rose-400"></div>
-          </div>
           <h2 className="text-3xl font-serif font-bold tracking-tight sm:text-4xl text-gray-900">
             Apa Kata Mereka Tentang Kami
           </h2>
-          <p className="text-gray-800 text-lg">
-            Dengarkan pengalaman pasangan yang telah mewujudkan pernikahan
-            impian mereka di Harmoni Wedding Venue.
-          </p>
         </div>
 
         {/* Featured Testimonial */}
@@ -126,22 +115,16 @@ export default function TestimonialsSection() {
         </div>
 
         {/* Grid Testimonials */}
-        <div className="grid md:grid-cols-2 p-10 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((testimonial, index) => (
             <Card
               key={index}
               className="border-none shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              <CardContent className="p-6">
-                <div className="flex items-center gap-4 mb-4">
-                  <div>
-                    <h3 className="font-bold text-gray-900">
-                      {testimonial.name}
-                    </h3>
-                    <p className="text-gray-700 text-sm">{testimonial.date}</p>
-                  </div>
-                </div>
-                <div className="flex mb-3">
+              <CardContent className="p-6 flex flex-col items-center text-center">
+                <h3 className="font-bold text-gray-900">{testimonial.name}</h3>
+                <p className="text-gray-700 text-sm mb-3">{testimonial.date}</p>
+                <div className="flex justify-center mb-3">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star
                       key={i}
@@ -153,13 +136,6 @@ export default function TestimonialsSection() {
               </CardContent>
             </Card>
           ))}
-        </div>
-
-        <div className="text-center mt-12">
-          <p className="text-gray-800">
-            Bergabunglah dengan ratusan pasangan bahagia yang telah mewujudkan
-            pernikahan impian mereka bersama kami.
-          </p>
         </div>
       </div>
     </section>

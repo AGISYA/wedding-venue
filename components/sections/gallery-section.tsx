@@ -8,7 +8,7 @@ export default function GallerySection() {
   const galleryItems = [
     {
       image: "/images/SCF9146.jpg",
-      colSpan: "col-span-2 row-span-2",
+      colSpan: "md:col-span-2 md:row-span-2",
       title: "Venue utama dengan dekorasi elegan",
     },
     {
@@ -31,17 +31,6 @@ export default function GallerySection() {
         "/images/Snapinst.app_362206933_257506557119644_5907997017666089862_n_1080.jpg",
       title: "Area makan dengan pencahayaan hangat",
     },
-    {
-      image:
-        "/images/Snapinst.app_361600755_257506467119653_3370119690151620194_n_1080.jpg",
-      colSpan: "col-span-2",
-      title: "Jalan masuk dengan karpet merah",
-    },
-    {
-      image:
-        "/images/Snapinst.app_361553465_257506637119636_3963530394742462174_n_1080.jpg",
-      title: "Panggung utama untuk pengantin",
-    },
   ];
 
   return (
@@ -49,7 +38,7 @@ export default function GallerySection() {
       id="galeri"
       className="py-20 md:py-28 bg-gradient-to-b from-rose-50 to-white"
     >
-      <div className="container">
+      <div className="container max-w-screen-lg mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <div className="flex items-center justify-center gap-2">
             <div className="h-px w-10 bg-rose-400"></div>
@@ -66,7 +55,7 @@ export default function GallerySection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 p-10 sm:grid-cols-3 md:grid-cols-4 gap-4 auto-rows-[200px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {galleryItems.map((item, index) => (
             <div
               key={index}
@@ -77,15 +66,12 @@ export default function GallerySection() {
               <Image
                 src={item.image || "/placeholder.svg"}
                 alt={item.title ?? "Gambar galeri venue"}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                width={300}
+                height={300}
+                className="object-cover w-full h-full rounded-xl transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                <Sparkles
-                  className={`${
-                    item.colSpan ? "h-10 w-10" : "h-8 w-8"
-                  } text-white`}
-                />
+                <Sparkles className="h-8 w-8 text-white" />
               </div>
             </div>
           ))}
